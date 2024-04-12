@@ -169,6 +169,11 @@ vim.keymap.set('n', '<leader>t', '<cmd>Ex<CR>')
 vim.keymap.set('n', ']b', ':bn<CR>')
 vim.keymap.set('n', '[b', ':bp<CR>')
 
+-- Keybinds for jumping in the quicklist
+vim.keymap.set('n', ']c', '<cmd>cnext<CR>')
+vim.keymap.set('n', '[c', '<cmd>cprev<CR>')
+vim.keymap.set('n', '<leader>cl', '<cmd>cclose<CR>')
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
