@@ -162,6 +162,9 @@ vim.opt.scrolloff = 10
 -- Set additional escape key
 vim.keymap.set('i', 'jk', '<Esc>')
 
+-- Open Netrw
+vim.keymap.set('n', '<leader>t', '<cmd>Ex<CR>')
+
 -- Keybinds for moving to next and previous buffer
 vim.keymap.set('n', ']b', ':bn<CR>')
 vim.keymap.set('n', '[b', ':bp<CR>')
