@@ -156,14 +156,29 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- TabStyle and width
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
 -- Set additional escape key
 vim.keymap.set('i', 'jk', '<Esc>')
 
+-- Go specific keybinds
+vim.keymap.set('n', '<leader>g', '<cmd>!go run .<CR>')
+
 -- Open Netrw
 vim.keymap.set('n', '<leader>t', '<cmd>Ex<CR>')
+
+-- Center when searching
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- Center when moving with c-d and c-u
+vim.keymap.set('n', '<c-d>', '<c-d>zz')
+vim.keymap.set('n', '<c-u>', '<c-u>zz')
 
 -- Keybinds for moving to next and previous buffer
 vim.keymap.set('n', ']b', ':bn<CR>')
