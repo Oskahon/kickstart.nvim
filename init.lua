@@ -181,8 +181,8 @@ vim.keymap.set('n', '<c-d>', '<c-d>zz')
 vim.keymap.set('n', '<c-u>', '<c-u>zz')
 
 -- Keybinds for moving to next and previous buffer
-vim.keymap.set('n', ']b', ':bn<CR>')
-vim.keymap.set('n', '[b', ':bp<CR>')
+vim.keymap.set('n', ']b', '<cmd>bn<CR>')
+vim.keymap.set('n', '[b', '<cmd>bp<CR>')
 
 -- Keybinds for jumping in the quicklist
 vim.keymap.set('n', ']c', '<cmd>cnext<CR>')
