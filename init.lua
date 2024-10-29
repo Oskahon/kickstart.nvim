@@ -166,11 +166,14 @@ vim.opt.shiftwidth = 4
 -- Set additional escape key
 vim.keymap.set('i', 'jk', '<Esc>')
 
+-- Save using leader + w
+vim.keymap.set('n', '<leader>w', '<cmd>w<CR>')
+
 -- Go specific keybinds
 vim.keymap.set('n', '<leader>g', '<cmd>!go run .<CR>')
 
 -- Open Netrw
-vim.keymap.set('n', '<leader>t', '<cmd>Ex<CR>')
+vim.keymap.set('n', '<leader>e', '<cmd>Ex<CR>')
 
 -- Center when searching
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -189,6 +192,10 @@ vim.keymap.set('n', ']c', '<cmd>cnext<CR>')
 vim.keymap.set('n', '[c', '<cmd>cprev<CR>')
 vim.keymap.set('n', '<leader>cl', '<cmd>cclose<CR>')
 
+-- Keybinds for selecting inside and around double quotes
+vim.keymap.set('o', 'iq', 'i"')
+vim.keymap.set('o', 'aq', 'a"')
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -196,10 +203,13 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>l', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- goto_prev and goto_next are deprecated and are now included with default nvim keybinds
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Show float after jumping to next and previous diagnostic
+vim.diagnostic.config { jump = { float = true } }
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -323,7 +333,7 @@ require('lazy').setup({
         { '<leader>r_', hidden = true },
         { '<leader>s', group = '[S]earch' },
         { '<leader>s_', hidden = true },
-        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w', group = 'Save file' },
         { '<leader>w_', hidden = true },
       }
     end,
@@ -522,7 +532,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>so', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Work[s]pace Symb[o]ls')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -531,6 +541,7 @@ require('lazy').setup({
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>.', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
